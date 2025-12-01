@@ -1,61 +1,51 @@
 package lib.ironpulse.swerve;
 
-import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.units.measure.Angle;
-import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.LinearVelocity;
-import edu.wpi.first.units.measure.Voltage;
 import org.littletonrobotics.junction.AutoLog;
 
+/**
+ * Hardware interface for a swerve module
+ * Defines methods for reading sensors and controlling motors
+ */
 public interface SwerveModuleIO {
-    // read
+    /**
+     * Update sensor inputs from hardware
+     */
     default void updateInputs(SwerveModuleIOInputs inputs) {
     }
 
-    // set
-    default void setSwerveModuleState(SwerveModuleState state) {
-    }
-    default void setDriveOpenLoop(Voltage des) {
-    }
-    default void setDriveVelocity(LinearVelocity des) {
-    }
-    default void setDriveVelocity(LinearVelocity des, Current ff) {
-        setDriveVelocity(des);
-    }
-    default void setSteerOpenLoop(Voltage des) {
-    }
-    default void setSteerAngleAbsolute(Angle des) {
+    /**
+     * Set drive motor velocity (closed-loop control)
+     */
+    default void setDriveVelocity(LinearVelocity desiredVelocity) {
     }
 
-    // config
-    default void configDriveController(double kp, double ki, double kd, double ks, double kv, double ka) {
-    }
-    default void configDriveBrake(boolean isBreak) {
-    }
-    default void configSteerController(double kp, double ki, double kd, double ks) {
-    }
-    default void configSteerBrake(boolean isBreak) {
+    /**
+     * Set steer motor angle (closed-loop control)
+     */
+    default void setSteerAngleAbsolute(Angle desiredAngle) {
     }
 
 
+    /**
+     * Sensor data from a swerve module
+     * AutoLog annotation automatically generates logging code
+     */
     @AutoLog
     class SwerveModuleIOInputs {
-        public boolean driveMotorConnected;
-        public double driveMotorPositionRad;
-        public double[] driveMotorPositionRadSamples;
-        public double driveMotorVelocityRadPerSec;
-        public double driveMotorTemperatureCel;
-        public double driveMotorVoltageVolt;
-        public double driveMotorSupplyCurrentAmpere;
-        public double driveMotorTorqueCurrentAmpere;
+        // Drive motor (wheel)
+        public boolean driveMotorConnected = false;
+        public double driveMotorPositionRad = 0.0;
+        public double driveMotorVelocityRadPerSec = 0.0;
+        public double driveMotorVoltageVolt = 0.0;
+        public double driveMotorCurrentAmpere = 0.0;
 
-        public boolean steerMotorConnected;
-        public double steerMotorPositionRad;
-        public double[] steerMotorPositionRadSamples;
-        public double steerMotorVelocityRadPerSec;
-        public double steerMotorTemperatureCel;
-        public double steerMotorVoltageVolt;
-        public double steerMotorSupplyCurrentAmpere;
-        public double steerMotorTorqueCurrentAmpere;
+        // Steer motor (module rotation)
+        public boolean steerMotorConnected = false;
+        public double steerMotorPositionRad = 0.0;
+        public double steerMotorVelocityRadPerSec = 0.0;
+        public double steerMotorVoltageVolt = 0.0;
+        public double steerMotorCurrentAmpere = 0.0;
     }
 }

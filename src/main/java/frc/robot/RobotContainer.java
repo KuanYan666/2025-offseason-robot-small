@@ -95,10 +95,10 @@ public class RobotContainer {
             swerve = new Swerve(
                     Constants.Swerve.kRealConfig,
                     new ImuIOPigeon(Constants.Swerve.kRealConfig),
-                    new SwerveModuleIOSJTU6(Constants.Swerve.kRealConfig, 0),
-                    new SwerveModuleIOSJTU6(Constants.Swerve.kRealConfig, 1),
-                    new SwerveModuleIOSJTU6(Constants.Swerve.kRealConfig, 2),
-                    new SwerveModuleIOSJTU6(Constants.Swerve.kRealConfig, 3));
+                    new SwerveModuleIOSJTU6Simple(Constants.Swerve.kRealConfig, 0),
+                    new SwerveModuleIOSJTU6Simple(Constants.Swerve.kRealConfig, 1),
+                    new SwerveModuleIOSJTU6Simple(Constants.Swerve.kRealConfig, 2),
+                    new SwerveModuleIOSJTU6Simple(Constants.Swerve.kRealConfig, 3));
             indicatorSubsystem = new IndicatorSubsystem(new IndicatorIOARGB());
             elevatorSubsystem = new ElevatorSubsystem(new ElevatorIOReal());
             endEffectorSubsystem = new EndEffectorSubsystem(
